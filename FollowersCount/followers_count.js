@@ -8,9 +8,6 @@ function increaseCount() {
     checkCountValue();
 }
 
-function displayCount() {
-    document.getElementById('countDisplay').innerHTML=count;
-}
 
 function checkCountValue() {
   if (count === 10) {
@@ -18,4 +15,13 @@ function checkCountValue() {
   } else if (count === 20) {
     alert("Your Instagram post gained 20 followers! Keep it up!");
   }
+}
+
+function resetBtn(){
+    count=0;
+    displayCount();
+}
+
+function displayCount() {
+    document.getElementById('countDisplay').innerHTML=count;
 }
