@@ -1,6 +1,6 @@
-const breakfastMenu = ['Pancakes', 'Eggs Benedict', 'Oatmeal', 'Frittata'];
-const mainCourseMenu = ['Steak', 'Pasta', 'Burger', 'Salmon'];
-const dessertMenu = ['Cake', 'Ice Cream', 'Pudding', 'Fruit Salad'];
+const breakfastMenu = ['Pancakes-$12', 'Eggs Benedict-$12', 'Oatmeal-$12', 'Frittata-$12'];
+const mainCourseMenu = ['Steak-$90.99', 'Pasta-$90.99', 'Burger-$90.99', 'Salmon-$90.99'];
+const dessertMenu = ['Cake-$14.99', 'Ice Cream-$14.99', 'Pudding-$14.99', 'Fruit Salad-$14.99'];
 
 const breakfastMenuItemsHTML = breakfastMenu.map((item, index) => `<p>Item ${index + 1}: ${item}</p>`).join('');
 document.getElementById('breakfastMenuItems').innerHTML = breakfastMenuItemsHTML;
