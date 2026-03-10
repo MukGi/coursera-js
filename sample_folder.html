@@ -1,10 +1,1010 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Sample Folder</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Client Portfolio | ABC Consultants</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.10);
+      --text: #e8eefc;
+      --muted: rgba(232,238,252,.75);
+      --accent: #7aa7ff;
+      --accent2:#7dffc8;
+      --ring: rgba(122,167,255,.35);
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 14px;
+      --max: 1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(122,167,255,.25), transparent 50%),
+        radial-gradient(1100px 700px at 90% 20%, rgba(125,255,200,.18), transparent 55%),
+        radial-gradient(900px 700px at 50% 90%, rgba(122,167,255,.14), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      line-height:1.55;
+    }
+
+    /* Top nav */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.65);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none; color:var(--text);
+      font-weight:700;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(122,167,255,.95), rgba(125,255,200,.85));
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .links{
+      display:flex; align-items:center; gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .links a{
+      text-decoration:none;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+      font-weight:600;
+      font-size: 14px;
+    }
+    .links a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+    .links a.active{
+      color: var(--text);
+      background: rgba(122,167,255,.14);
+      border-color: rgba(122,167,255,.25);
+      box-shadow: 0 0 0 4px rgba(122,167,255,.08);
+    }
+
+    /* Layout */
+    header, section, footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 26px 18px;
+    }
+
+    /* Hero */
+    .hero{
+      padding-top: 34px;
+      padding-bottom: 12px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      position: relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(600px 260px at 20% 0%, rgba(122,167,255,.22), transparent 55%);
+      pointer-events:none;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      width: fit-content;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(125,255,200,.12);
+    }
+    h1{
+      margin: 12px 0 8px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.15;
+      letter-spacing:-.4px;
+    }
+    .subtitle{
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 60ch;
+      margin: 0 0 14px;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      font-weight:700;
+      transition:.2s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+    }
+    .btn.primary{
+      border-color: rgba(122,167,255,.35);
+      background: rgba(122,167,255,.18);
+      box-shadow: 0 0 0 4px rgba(122,167,255,.08);
+    }
+    .btn.primary:hover{
+      background: rgba(122,167,255,.24);
+    }
+    .btn .icon{
+      font-family: var(--mono);
+      font-size: 13px;
+      opacity:.9;
+    }
+
+    .profile{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .profile-card{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      height:100%;
+    }
+    .avatar{
+      width: 64px; height:64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(122,167,255,.8), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.16);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:900;
+      letter-spacing:.5px;
+      margin-bottom: 12px;
+    }
+    .meta{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .meta-item{
+      padding: 12px;
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .meta-item b{ display:block; font-size: 13px; color: var(--muted); margin-bottom: 2px; }
+    .meta-item span{ font-weight:700; }
+
+    /* Sections */
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin: 6px 0 12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: -.2px;
+    }
+    .section-title p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 62ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .card{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    /* About */
+    #about .card{
+      grid-column: span 12;
+      display:grid;
+      grid-template-columns: 1.4fr .6fr;
+      gap: 14px;
+      align-items:start;
+    }
+    .about-text p{ margin:0 0 10px; color: var(--muted); }
+    .about-highlights{
+      display:grid;
+      gap:10px;
+    }
+    .pill{
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight:700;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+    }
+    .pill small{ display:block; color: var(--muted); font-weight:600; margin-top:2px; }
+
+    /* Skills */
+    #skills .card{
+      grid-column: span 4;
+    }
+    .skill{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .skill:last-child{ margin-bottom:0; }
+    .skill-name{
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .skill-bar{
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+      margin-top: 8px;
+    }
+    .skill-bar > span{
+      display:block;
+      height:100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(122,167,255,.95), rgba(125,255,200,.90));
+      box-shadow: 0 0 18px rgba(122,167,255,.25);
+      transition: width 900ms ease;
+    }
+    .skill-note{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Projects */
+    #projects .card{
+      grid-column: span 6;
+      position:relative;
+      overflow:hidden;
+    }
+    .project-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 8px;
+    }
+    .project-top h3{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    .badge{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      white-space:nowrap;
+    }
+    .project-desc{
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom: 12px;
+    }
+    .chip{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: rgba(232,238,252,.9);
+    }
+    .project-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    /* Recommendations */
+    #recommendations .card{
+      grid-column: span 6;
+    }
+    .quote{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .quote::before{ content:"“"; }
+    .quote::after{ content:"”"; }
+    .who{
+      margin-top: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      color: rgba(232,238,252,.9);
+      font-weight:800;
+    }
+    .who small{
+      display:block;
+      font-weight:600;
+      color: var(--muted);
+    }
+
+    /* Add Recommendation form */
+    .form{
+      grid-column: span 12;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items:start;
+    }
+    .form .card{ box-shadow: none; }
+    label{
+      display:block;
+      font-size: 13px;
+      font-weight:800;
+      color: rgba(232,238,252,.9);
+      margin: 0 0 6px;
+    }
+    input, textarea{
+      width:100%;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      outline:none;
+      transition: .2s ease;
+      font: inherit;
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+    input:focus, textarea:focus{
+      border-color: rgba(122,167,255,.55);
+      box-shadow: 0 0 0 4px rgba(122,167,255,.12);
+    }
+    .form-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .hint{
+      color: var(--muted);
+      font-size: 13px;
+      margin: 10px 0 0;
+    }
+
+    /* Footer */
+    footer{
+      padding-top: 10px;
+      padding-bottom: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+      #about .card{ grid-template-columns: 1fr; }
+      #skills .card{ grid-column: span 6; }
+      #projects .card{ grid-column: span 12; }
+      #recommendations .card{ grid-column: span 12; }
+      .form{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px){
+      #skills .card{ grid-column: span 12; }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Sample Folder</h1>
-  <button>SampleFolder</button>
+  <!-- Sticky Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Client Portfolio</span>
+      </a>
+      <div class="links" id="navLinks">
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#recommendations">Recommendations</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="top" class="hero">
+    <div class="hero-card">
+      <div class="tag"><span class="dot" aria-hidden="true"></span><span>Open to opportunities • &lt; 5 years experience</span></div>
+      <h1 id="clientName">Avery Patel</h1>
+      <p class="subtitle" id="headline">
+        Front-End Developer focused on building clean, accessible, and responsive web experiences.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="#projects"><span class="icon">{ }</span>View Projects</a>
+        <button class="btn" id="copyEmailBtn" type="button"><span class="icon">@</span>Copy Email</button>
+        <button class="btn" id="downloadBtn" type="button"><span class="icon">⭳</span>Download as HTML</button>
+      </div>
+      <p class="hint" id="copyHint" aria-live="polite"></p>
+    </div>
+
+    <div class="profile">
+      <div class="profile-card">
+        <div class="avatar" id="avatar">AP</div>
+        <div class="meta">
+          <div class="meta-item">
+            <b>Location</b>
+            <span id="location">Seattle, WA</span>
+          </div>
+          <div class="meta-item">
+            <b>Email</b>
+            <span id="email">avery.patel@email.com</span>
+          </div>
+          <div class="meta-item">
+            <b>LinkedIn</b>
+            <span id="linkedin">linkedin.com/in/averypatel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-title">
+      <h2>About Me</h2>
+      <p>A quick overview of who I am and what I bring to a team.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="about-text">
+          <p id="aboutParagraph1">
+            I’m a front-end developer with experience turning designs into fast, responsive, and accessible webpages.
+            I enjoy collaborating with designers and back-end developers to ship features that users actually love.
+          </p>
+          <p id="aboutParagraph2">
+            My strengths include clean UI implementation, JavaScript-driven interactivity, and building reusable components.
+            I’m comfortable working in Agile teams and communicating progress clearly.
+          </p>
+        </div>
+
+        <div class="about-highlights">
+          <div class="pill">
+            Strengths
+            <small id="strengths">UI build-out • Accessibility • Debugging • Collaboration</small>
+          </div>
+          <div class="pill">
+            Interests
+            <small id="interests">Design systems • Performance • Modern CSS</small>
+          </div>
+          <div class="pill">
+            Currently learning
+            <small id="learning">TypeScript • Testing basics</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="section-title">
+      <h2>Skills</h2>
+      <p>Core skills shown as levels (editable in the JavaScript data).</p>
+    </div>
+
+    <div class="grid" id="skillsGrid">
+      <!-- JS renders skill cards here -->
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="section-title">
+      <h2>Projects</h2>
+      <p>Selected work that demonstrates practical, job-ready skills.</p>
+    </div>
+
+    <div class="grid" id="projectsGrid">
+      <!-- JS renders projects here -->
+    </div>
+  </section>
+
+  <!-- Recommendations -->
+  <section id="recommendations">
+    <div class="section-title">
+      <h2>Recommendations</h2>
+      <p>Short quotes from people who’ve worked with me.</p>
+    </div>
+
+    <div class="grid" id="recsGrid">
+      <!-- JS renders recommendation cards here -->
+    </div>
+
+    <div class="grid form">
+      <div class="card">
+        <h3 style="margin:0 0 10px; letter-spacing:-.2px;">Add a Recommendation</h3>
+        <p class="hint" style="margin-top:0;">
+          This is a static page, so recommendations are saved only in your browser (localStorage).
+        </p>
+
+        <div style="margin-top:12px;">
+          <label for="recName">Name</label>
+          <input id="recName" placeholder="e.g., Jordan Lee" autocomplete="name" />
+        </div>
+
+        <div style="margin-top:12px;">
+          <label for="recRole">Role / Relationship</label>
+          <input id="recRole" placeholder="e.g., Team Lead • Internship Supervisor" />
+        </div>
+
+        <div style="margin-top:12px;">
+          <label for="recText">Recommendation</label>
+          <textarea id="recText" placeholder="Write a short recommendation..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary" id="addRecBtn" type="button"><span class="icon">+</span>Add</button>
+          <button class="btn" id="clearRecsBtn" type="button"><span class="icon">×</span>Clear Saved</button>
+        </div>
+
+        <p class="hint" id="recHint" aria-live="polite"></p>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0 0 10px; letter-spacing:-.2px;">Tip for Employers</h3>
+        <p class="hint" style="margin-top:0;">
+          This portfolio is designed as a single static webpage for easy sharing and quick review.
+        </p>
+        <ul style="margin:10px 0 0; padding-left: 18px; color: var(--muted);">
+          <li>Projects include tools, outcomes, and what was built.</li>
+          <li>Skills are grouped into Front-End, Tools, and Collaboration.</li>
+          <li>Recommendations can be added locally for demo purposes.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <div>© <span id="year"></span> • Shared via ABC Consultants</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="#top"><span class="icon">↑</span>Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================
+    // 1) EDIT THIS DATA
+    // =========================
+    const portfolio = {
+      name: "Avery Patel",
+      headline: "Front-End Developer focused on building clean, accessible, and responsive web experiences.",
+      location: "Seattle, WA",
+      email: "avery.patel@email.com",
+      linkedin: "linkedin.com/in/averypatel",
+      about: [
+        "I’m a front-end developer with experience turning designs into fast, responsive, and accessible webpages. I enjoy collaborating with designers and back-end developers to ship features that users actually love.",
+        "My strengths include clean UI implementation, JavaScript-driven interactivity, and building reusable components. I’m comfortable working in Agile teams and communicating progress clearly."
+      ],
+      highlights: {
+        strengths: "UI build-out • Accessibility • Debugging • Collaboration",
+        interests: "Design systems • Performance • Modern CSS",
+        learning: "TypeScript • Testing basics"
+      },
+      skills: [
+        { group: "Front-End", items: [
+          { name: "HTML", level: 90 },
+          { name: "CSS", level: 85 },
+          { name: "JavaScript", level: 80 },
+          { name: "Accessibility", level: 75 }
+        ]},
+        { group: "Tools", items: [
+          { name: "Git/GitHub", level: 78 },
+          { name: "Responsive Design", level: 82 },
+          { name: "REST Basics", level: 65 },
+          { name: "Debugging", level: 78 }
+        ]},
+        { group: "Collaboration", items: [
+          { name: "Communication", level: 80 },
+          { name: "Agile / Scrum", level: 70 },
+          { name: "Documentation", level: 72 },
+          { name: "Stakeholder Updates", level: 68 }
+        ]}
+      ],
+      projects: [
+        {
+          title: "TaskFlow – To-Do Web App",
+          status: "Completed",
+          description: "A responsive task manager with filtering, local storage persistence, and keyboard-friendly UX.",
+          tech: ["HTML", "CSS", "JavaScript", "localStorage"],
+          links: [
+            { label: "Live Demo", href: "#" },
+            { label: "Source Code", href: "#" }
+          ]
+        },
+        {
+          title: "Cafe Finder – Map UI Mock",
+          status: "In Progress",
+          description: "A clean UI concept for searching cafes, viewing cards, and saving favorites (front-end only).",
+          tech: ["CSS Grid", "Flexbox", "JavaScript"],
+          links: [
+            { label: "Prototype", href: "#" }
+          ]
+        },
+        {
+          title: "Portfolio Template – Single Page",
+          status: "Completed",
+          description: "A single static webpage portfolio with sections, smooth scrolling, and local recommendations.",
+          tech: ["HTML", "CSS", "JavaScript"],
+          links: [
+            { label: "View Page", href: "#" }
+          ]
+        },
+        {
+          title: "Bug Bash Notes – QA Helper",
+          status: "Completed",
+          description: "A tiny web tool to capture bug notes fast with copy/export actions for quick sharing.",
+          tech: ["JavaScript", "DOM", "UX"],
+          links: [
+            { label: "Demo", href: "#" }
+          ]
+        }
+      ],
+      defaultRecommendations: [
+        {
+          text: "Consistently delivers polished UI work and communicates progress clearly. A dependable contributor.",
+          name: "Jordan Lee",
+          role: "Team Lead"
+        },
+        {
+          text: "Strong attention to detail and accessibility. Great at turning feedback into improvements quickly.",
+          name: "Sam Rivera",
+          role: "Designer"
+        }
+      ]
+    };
+
+    // =========================
+    // 2) RENDERING HELPERS
+    // =========================
+    const $ = (sel) => document.querySelector(sel);
+    const el = (tag, attrs = {}, children = []) => {
+      const node = document.createElement(tag);
+      Object.entries(attrs).forEach(([k,v]) => {
+        if (k === "class") node.className = v;
+        else if (k === "text") node.textContent = v;
+        else node.setAttribute(k, v);
+      });
+      children.forEach(child => node.appendChild(child));
+      return node;
+    };
+
+    function initials(name){
+      return name.split(" ").slice(0,2).map(p => p[0]?.toUpperCase() || "").join("");
+    }
+
+    // =========================
+    // 3) POPULATE HEADER / ABOUT
+    // =========================
+    function populateBasics(){
+      $("#clientName").textContent = portfolio.name;
+      $("#headline").textContent = portfolio.headline;
+      $("#location").textContent = portfolio.location;
+      $("#email").textContent = portfolio.email;
+      $("#linkedin").textContent = portfolio.linkedin;
+
+      $("#avatar").textContent = initials(portfolio.name);
+
+      $("#aboutParagraph1").textContent = portfolio.about[0] || "";
+      $("#aboutParagraph2").textContent = portfolio.about[1] || "";
+
+      $("#strengths").textContent = portfolio.highlights.strengths;
+      $("#interests").textContent = portfolio.highlights.interests;
+      $("#learning").textContent = portfolio.highlights.learning;
+
+      $("#year").textContent = new Date().getFullYear();
+    }
+
+    // =========================
+    // 4) SKILLS
+    // =========================
+    function renderSkills(){
+      const grid = $("#skillsGrid");
+      grid.innerHTML = "";
+
+      portfolio.skills.forEach(group => {
+        const card = el("div", { class:"card" }, [
+          el("div", { class:"section-title" }, [
+            el("h2", { text: group.group }),
+            el("p", { text: " " })
+          ])
+        ]);
+
+        group.items.forEach(s => {
+          const row = el("div", { class:"skill" }, [
+            el("div", { class:"skill-name", text: s.name }),
+            el("div", { class:"badge", text: `${s.level}%` })
+          ]);
+
+          const bar = el("div", { class:"skill-bar" }, [
+            el("span", { "data-level": String(s.level) })
+          ]);
+
+          const wrap = el("div", {}, [row, bar]);
+          card.appendChild(wrap);
+        });
+
+        const note = el("div", { class:"skill-note", text:"Levels represent current comfort and frequency of use." });
+        card.appendChild(note);
+
+        grid.appendChild(card);
+      });
+
+      // animate bars after paint
+      requestAnimationFrame(() => {
+        document.querySelectorAll(".skill-bar > span").forEach(span => {
+          const lvl = span.getAttribute("data-level") || "0";
+          span.style.width = `${lvl}%`;
+        });
+      });
+    }
+
+    // =========================
+    // 5) PROJECTS
+    // =========================
+    function renderProjects(){
+      const grid = $("#projectsGrid");
+      grid.innerHTML = "";
+
+      portfolio.projects.forEach(p => {
+        const titleRow = el("div", { class:"project-top" }, [
+          el("h3", { text: p.title }),
+          el("span", { class:"badge", text: p.status })
+        ]);
+
+        const desc = el("p", { class:"project-desc", text: p.description });
+
+        const chips = el("div", { class:"chips" }, p.tech.map(t => el("span", { class:"chip", text: t })));
+
+        const links = el("div", { class:"project-links" }, (p.links || []).map(l =>
+          el("a", { class:"btn", href: l.href, target: "_blank", rel:"noopener", }, [
+            el("span", { class:"icon", text:"↗" }),
+            el("span", { text: l.label })
+          ])
+        ));
+
+        const card = el("div", { class:"card" }, [titleRow, desc, chips, links]);
+        grid.appendChild(card);
+      });
+    }
+
+    // =========================
+    // 6) RECOMMENDATIONS (with localStorage)
+    // =========================
+    const RECS_KEY = "abc_portfolio_recommendations_v1";
+
+    function loadRecs(){
+      try{
+        const raw = localStorage.getItem(RECS_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      }catch{
+        return [];
+      }
+    }
+
+    function saveRecs(recs){
+      localStorage.setItem(RECS_KEY, JSON.stringify(recs));
+    }
+
+    function renderRecs(){
+      const grid = $("#recsGrid");
+      grid.innerHTML = "";
+
+      const saved = loadRecs();
+      const combined = [...portfolio.defaultRecommendations, ...saved];
+
+      combined.forEach(r => {
+        const card = el("div", { class:"card" }, [
+          el("p", { class:"quote", text: r.text }),
+          el("div", { class:"who" }, [
+            el("div", {}, [
+              el("div", { text: r.name }),
+              el("small", { text: r.role })
+            ]),
+            el("span", { class:"badge", text:"Recommendation" })
+          ])
+        ]);
+        grid.appendChild(card);
+      });
+    }
+
+    function addRecommendation(){
+      const name = $("#recName").value.trim();
+      const role = $("#recRole").value.trim();
+      const text = $("#recText").value.trim();
+      const hint = $("#recHint");
+
+      if (!name || !role || !text){
+        hint.textContent = "Please fill in Name, Role, and Recommendation text.";
+        return;
+      }
+      if (text.length < 20){
+        hint.textContent = "Recommendation is a bit short—try at least 20 characters.";
+        return;
+      }
+
+      const saved = loadRecs();
+      saved.unshift({ name, role, text });
+      saveRecs(saved);
+
+      $("#recName").value = "";
+      $("#recRole").value = "";
+      $("#recText").value = "";
+      hint.textContent = "Saved locally! (Only this browser will remember it.)";
+
+      renderRecs();
+    }
+
+    function clearSavedRecs(){
+      localStorage.removeItem(RECS_KEY);
+      $("#recHint").textContent = "Cleared saved recommendations from this browser.";
+      renderRecs();
+    }
+
+    // =========================
+    // 7) NAV ACTIVE LINK (scroll spy)
+    // =========================
+    function setupScrollSpy(){
+      const links = Array.from(document.querySelectorAll("#navLinks a"));
+      const sections = links.map(a => document.querySelector(a.getAttribute("href")));
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting){
+            links.forEach(l => l.classList.remove("active"));
+            const id = "#" + entry.target.id;
+            const match = links.find(l => l.getAttribute("href") === id);
+            if (match) match.classList.add("active");
+          }
+        });
+      }, { root: null, threshold: 0.35 });
+
+      sections.forEach(s => s && observer.observe(s));
+    }
+
+    // =========================
+    // 8) UTILS: COPY EMAIL + DOWNLOAD
+    // =========================
+    async function copyEmail(){
+      const hint = $("#copyHint");
+      try{
+        await navigator.clipboard.writeText(portfolio.email);
+        hint.textContent = "Email copied to clipboard.";
+      }catch{
+        hint.textContent = "Couldn’t copy automatically—please select and copy the email from the card.";
+      }
+      setTimeout(() => (hint.textContent = ""), 2500);
+    }
+
+    function downloadHTML(){
+      const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = (portfolio.name || "portfolio").toLowerCase().replace(/\s+/g,"-") + ".html";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    // =========================
+    // INIT
+    // =========================
+    populateBasics();
+    renderSkills();
+    renderProjects();
+    renderRecs();
+    setupScrollSpy();
+
+    $("#addRecBtn").addEventListener("click", addRecommendation);
+    $("#clearRecsBtn").addEventListener("click", clearSavedRecs);
+    $("#copyEmailBtn").addEventListener("click", copyEmail);
+    $("#downloadBtn").addEventListener("click", downloadHTML);
+  </script>
 </body>
 </html>

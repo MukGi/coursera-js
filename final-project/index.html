@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gift Mukolo - Portfolio</title>
+    <link rel="stylesheet" href="./style.css"/>
+    <script src="./script.js"></script>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav>
+      <div id="home">
+        <div class="profile_name">
+          Gift Mukolo
+          <div class="contact_info">
+            <img src="html_finalprojimages/envelope.png" alt="https://icons8.com/icon/124377/circled-envelope"/>
+          jdoe@jeemail.com
+        </div>
+        <div style="clear:both;"></div>
+        <div class="contact_info">
+          <img src="html_finalprojimages/phone.png" alt="https://icons8.com/icon/124377/circled-envelope"/>
+          +13456764598
+
+        </div>
+        </div>
+        <div class="topdiv">
+          <a class="topmenu" href="#about-me">About Me</a>
+          <!-- Add the links for Skills, Projects and Recommendation here -->
+          <a class="topmenu" href="#skills">Skills</a>
+           <a class="topmenu" href="#projects">Projects</a>
+           <a class="topmenu" href="#recommendations">Recommendations</a>
+        </div>
+      </div>    
+    </nav>
+
+    <!-- About Me -->
+    <section id="about-me" class="container">
+      <div>
+        <img src="https://miro.medium.com/max/1400/1*qdAW1TjCN57h1lbuuzvchg.gif" class="profile_image"/>
+      </div>
+
+      <div>
+          <h1>
+            Hi, I'm Gift Mukolo! <img src="html_finalprojimages/waving-hand.png" width="60px"/>
+          </h1>
+          <p>
+            Full Stack Developer with 2+ years of experience building scalable web applications across frontend and backend systems.
+            Experienced in designing RESTful APIs, integrating cloud services, and deploying production-ready applications.
+            Passionate about writing clean, maintainable code and building user-focused digital products that solve real-world problems.
+          </p>
+      </div>
+    </section>
+              
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div style="clear:both;"></div>
+
+      <div class="all_skills">
+        <div class="skill">
+          <img src="html_finalprojimages/html5.png"/>
+          <h6>HTML</h6>
+          <p>2 years experience</p>
+        </div>  
+
+        <div class="skill">
+          <img src="html_finalprojimages/js.jpeg"/>
+          <h6>JavaScript</h6>
+          <p>3 years experience</p>
+        </div>  
+
+        <!-- Add more skills here -->
+        
+        <div class="skill">
+            <img src="html_finalprojimages/java.png"/>
+            <h6>Java</h6>
+            <p>2 years experience</p>
+          </div> 
+          
+          <div class="skill">
+            <img src="html_finalprojimages/node.png"/>
+            <h6>node</h6>
+            <p>6 years experience</p>
+          </div> 
+  
+          <div class="skill">
+            <img src="html_finalprojimages/react.png"/>
+            <h6>ReactJS</h6>
+            <p>5 years experience</p>
+          </div> 
+
+
+      </div>
+    </section>
+          
+    <!-- Projects -->
+    <section class="projects" id="projects">
+      <h2>
+        Projects
+      </h2>
+      <div style="clear:both;"></div>
+
+        <div id="projects-container" class="projects-container">
+          <div class="project-card">
+            <h3>Task Management Web App</h3>
+            <ul>
+              <li>Built a productivity web app that allows users to create, organize, and track tasks with real-time updates using JavaScript and local storage.</li>
+            </ul>
+          </div>
+          <hr>
+          <div class="project-card">
+            <h3>Weather Dashboard</h3>
+            <ul>
+              <li>Developed a web application that fetches and displays real-time weather data using a public API and dynamic UI updates.</li>
+            </ul>
+          </div>
+          <hr>
+          <div class="project-card">
+            <h3>Expense Tracker</h3>
+            <ul>
+              <li>Implemented a web app to track daily expenses, categorize spending, and visualize data using charts.</li>
+            </ul>
+          </div>
+    </div>
+    </section>
+    <div style="clear:both;"></div>
+
+    <!-- Recommendations -->
+    <section id="recommendations">
+      <h2>Recommendations</h2>
+      <div style="clear:both;"></div>
+      <div class="all_recommendations" id="all_recommendations">
+        <div class="recommendation">
+          <span>&#8220;</span>
+          Gift consistently demonstrates strong problem-solving skills and a great passion for web development. 
+          He approaches challenges with patience and determination, always looking for the most effective solution. 
+          His willingness to learn and improve makes him a valuable member of any development team.
+          <span>&#8221;</span>
+        </div>
+        <div class="recommendation">
+          <span>&#8220;</span>
+          Gift is a dependable and hardworking developer who takes pride in the quality of his work. 
+          He communicates clearly, collaborates well with teammates, and always ensures that tasks are completed on time. 
+          His dedication and professionalism stand out in every project he contributes to.
+          <span>&#8221;</span>
+        </div>
+        <div class="recommendation">
+          <span>&#8220;</span>
+          Having Gift on a project brings both technical skill and a positive mindset.
+          He adapts quickly to new tools and technologies and is always eager to share ideas that improve the final product.
+          Gift’s commitment to growth and excellence makes him an asset to any organization. 
+          <span>&#8221;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendation Form -->
+    <section id="contact">
+      <div class="flex_center">
+        <fieldset>
+          <legend class="introduction">Leave a Recommendation</legend>          
+          <input type="text" placeholder="Name (Optional)"> <br/>
+          <textarea id="new_recommendation" cols="500" rows="10" placeholder="Message"></textarea>
+          <div class="flex_center">
+            <button id="recommend_btn" onclick="addRecommendation()">Submit</button>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+
+    <div class="iconbutton">
+      <a href="#home">
+        <!--Add the code here for the logo to appear and the icon to be actionable-->
+      </a>
+    </div>
+
+    <div class="popup" id="popup" class="flex_center">
+      <img src="html_finalprojimages/checkmark--outline.svg"/>
+      <h3><!-- Add appropriate text here--></h3>
+      <button onclick="showPopup(false)">Ok</button>
+    </div>
+  </body>
+</html>
